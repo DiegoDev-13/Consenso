@@ -1,6 +1,6 @@
 import {MyRoutes} from './index'
 import {createContext, useState} from 'react'
-import {Light, Dark} from './index'
+import {Light, Dark, AuthContextProvider} from './index'
 import {ThemeProvider} from 'styled-components'
 
 export const ThemeContext = createContext(null)
@@ -15,7 +15,11 @@ function App() {
     <>
       <ThemeContext.Provider value={{setTheme, theme}}>
         <ThemeProvider theme={themeStyle}>
-          <MyRoutes />
+
+          <AuthContextProvider>
+            <MyRoutes />
+          </AuthContextProvider>
+
         </ThemeProvider>
       </ThemeContext.Provider>
     </>
