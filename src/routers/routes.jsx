@@ -6,7 +6,6 @@ export const MyRoutes = () => {
   const {user} = UserAuth()
 
   return (
-    <BrowserRouter>
       <Routes>
         <Route path='/login'  element={<Login/>} />
 
@@ -15,6 +14,5 @@ export const MyRoutes = () => {
         </Route>
 
       </Routes>
-    </BrowserRouter>
   )
 }

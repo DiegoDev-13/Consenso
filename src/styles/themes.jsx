@@ -31,7 +31,7 @@ export const Light ={
     slideroffset:"0.3em",
     sizeoficon:"1.4em",
     colorSubtitle:"#2c2c2c",
-    colorScroll:"#cac9ca"
+    colorScroll:"#cac9ca",
 
 }
 export const Dark = {
