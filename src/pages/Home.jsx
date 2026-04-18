@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/AuthStore";
 import { UserAuth } from "../context/AuthContext";
 export function Home() {
 
-  const {sighOut} = useAuthStore()
+  const {signOut} = useAuthStore()
   const {user} = UserAuth()
 
 
@@ -13,7 +13,7 @@ export function Home() {
     <Container>
         <h1>Home Bienvenido {user.name}</h1>
         <img src={user.picture} alt="" />
-        <button onClick={sighOut}>Cerrar sesion</button>
+        <button onClick={() => signOut()}>Cerrar sesion</button>
     </Container>
     );
 }

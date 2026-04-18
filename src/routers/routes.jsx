@@ -1,5 +1,5 @@
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
-import {Login, Home, ProtectedRoute, UserAuth} from '../index'
+import {Login, Home, ProtectedRoute, UserAuth, Configuration} from '../index'
 
 export const MyRoutes = () => {
 
@@ -9,8 +9,9 @@ export const MyRoutes = () => {
       <Routes>
         <Route path='/login'  element={<Login/>} />
 
-        <Route element={<ProtectedRoute user={user} redirecTo="/Login" />}>
+        <Route element={<ProtectedRoute user={user} redirecTo="/login" />}>
           <Route path='/'  element={<Home/>} />
+          <Route path='/configurar' element={<Configuration />} />
         </Route>
 
       </Routes>
