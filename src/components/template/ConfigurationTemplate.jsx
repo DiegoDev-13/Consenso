@@ -1,16 +1,41 @@
 import styled from "styled-components";
-import {Header, Selector, v, ListCountry} from "../../index"
+import {Header, Selector, v, ListCountry, useUsersStore, ListGeneric, TemasData, BtnSave} from "../../index"
 import { useState } from "react";
 
 export function ConfigurationTemplate() {
 
-    const [openMenuUser, setOpenMenuUser] = useState(false)
-    const [listCountry, setListCountry] = useState(false)
-    const [select, setSelect] = useState([])
+    const {dataUser, editThemeCurrencyUser} = useUsersStore()
 
-    const currency = select.symbol
-    const country = select.countryName
+    const [openMenuUser, setOpenMenuUser] = useState(false)
+    const [select, setSelect] = useState([])
+    const [listCountry, setListCountry] = useState(false)
+    const [selectTheme, setSelectTheme] = useState([])
+    const [listThemes, setListThemes] = useState(false)
+
+    //Pais - Moneda
+    const currency = select.symbol ? select.symbol : dataUser.currency
+    const country = select.countryName ? select.countryName : dataUser.country
     const countrySelected = `🐷 ${currency} ${country}`
+
+    //Tema
+    const iconDb = dataUser.theme === "0" ? '🌞' : '🌚'
+    const themeDb = dataUser.theme === "0" ? 'light' : 'dark'
+    const themeInitial = selectTheme.descripcion ? selectTheme.descripcion : themeDb
+    const iconInitial = selectTheme.icono ? selectTheme.icono  : iconDb
+    const selectedTheme = `${iconInitial} ${themeInitial}`
+
+    //Funcion guardar datos
+    const edit = async () => {
+        const chosenTheme = selectTheme.descripcion === "light" ? '0' : '1'
+        const p = {
+            theme: chosenTheme,
+            currency: currency,
+            country: country,
+            id: dataUser.id
+        }
+
+        await editThemeCurrencyUser(p)
+    }
 
   return (
 <Container>
@@ -18,11 +43,8 @@ export function ConfigurationTemplate() {
         <Header state={openMenuUser} setState={setOpenMenuUser} />
     </header>
 
-    <section className="area1">
-        <h1>Ajustes</h1>
-    </section>
-
     <section className="area2">
+        <h1>AJUSTES</h1>
         <ContentCard>
             <span>Moneda:</span>
             <Selector state={listCountry} color={v.colorSecundario} text1={countrySelected} funcion={() => setListCountry(!listCountry)} />
@@ -31,10 +53,17 @@ export function ConfigurationTemplate() {
             }
             
         </ContentCard>
-    </section>
 
-    <section className="main">
-        
+        <ContentCard>
+            <span>Tema:</span>
+            <Selector text1={selectedTheme} color={v.colorSecundario} state={listThemes} funcion={() => setListThemes(!listThemes)}>
+            </Selector>
+            {
+                listThemes && <ListGeneric data={TemasData} setState={() => setListThemes(!listThemes)} funcion={setSelectTheme} />
+            }
+        </ContentCard>
+
+        <BtnSave title="Guardar" bgColor={v.colorSecundario} icon={<v.iconoguardar/>} functionBtn={edit} />
     </section>
 
 </Container>
@@ -49,31 +78,25 @@ const Container =styled.div`
     display: grid;
     grid-template: 
         "header" 100px
-        "area1" 100px
-        "area2" 50px
-        "main" auto;
+        "area2" auto;
 
         .header {
             grid-area: header;
-            background-color: rgba(103, 93, 241, 0.14);
-            display: flex;
-            align-items: center;
-        }
-        .area1 {
-            grid-area: area1;
-            background-color: rgba(229, 67, 26, 0.14);
+            /* background-color: rgba(103, 93, 241, 0.14); */
             display: flex;
             align-items: center;
         }
         .area2 {
             grid-area: area2;
-            background-color: rgba(77, 237, 106, 0.14);
+            /* background-color: rgba(77, 237, 106, 0.14); */
             display: flex;
             align-items: center;
-        }
-        .main {
-            grid-area: main;
-            background-color: rgba(179, 46, 241, 0.14);
+            flex-direction: column;
+            justify-content: start;
+            gap: 30px;
+            h1 {
+                font-size: 3rem;
+            }
         }
     
 `

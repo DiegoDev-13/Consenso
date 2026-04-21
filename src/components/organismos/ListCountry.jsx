@@ -1,5 +1,5 @@
+import {v, InputSearchList, ConvertirCapitalize, Device, BtnClose} from '../../index'
 import styled from "styled-components";
-import {v, InputSearchList, ConvertirCapitalize} from '../../index'
 import iso from 'iso-country-currency'
 import { useState } from "react";
 
@@ -22,10 +22,10 @@ export function ListCountry({setSelect, setState}) {
     }
 
   return (
-    <Container>
+    <Container Device={Device}>
         <header className="header">
             <span>Busca tu pais</span>
-            <span className="close" onClick={setState}>{<v.iconocerrar />}</span>
+            <BtnClose funcion={setState} />
         </header>
 
         <InputSearchList onChange={search} placeholder="Buscar..." />
@@ -47,27 +47,22 @@ const Container =styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    background: ${(props) => props.theme.bgtotal};
+    background: ${(props) => props.theme.body};
     border-radius: 10px;
     border: 3px solid #3a3a3a;
     padding: 10px;
     gap: 10px;
     color: ${(props) => props.theme.text};
-    transition: all 0.3s;
+    z-index: 3;
+
+    @media ${(props) => Device.tablet}  {
+        width: 400px;
+    }
     .header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: inherit;
-        .close {
-            cursor: pointer;
-            font-size: 25px;
-            transition: all 0.2s;
-            &:hover {
-                color: ${() => v.colorSecundario};
-                transform: scale(1.2);
-            }
-        }
     }
 
 `

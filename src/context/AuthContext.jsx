@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
           setUser(session?.user.user_metadata);
           insertUsers(session?.user.user_metadata, session?.user.id)
           // console.log("event", event);
-          console.log("session", session?.user.user_metadata);
+          // console.log("session", session?.user.user_metadata);
         }
       }
     );

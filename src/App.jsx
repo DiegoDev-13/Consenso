@@ -1,23 +1,37 @@
-import {MyRoutes, Sidebar, Device, Light, Dark, AuthContextProvider, MenuAmbur} from './index'
+import {MyRoutes, Sidebar, Device, Light, Dark, AuthContextProvider, MenuAmbur, useUsersStore, Login} from './index'
 import {createContext, useState} from 'react'
 import {styled, ThemeProvider} from 'styled-components'
 import {useLocation} from 'react-router-dom'
+import {useQuery} from '@tanstack/react-query'
 
 export const ThemeContext = createContext(null)
 
 function App() {
 
-  const [theme, setTheme] = useState('Dark')
+  const {getUsersStore, dataUser} = useUsersStore()
+
+  // const [theme, setTheme] = useState('dark')
+  const theme = dataUser?.theme === '0' ? 'light' : 'dark'
   const themeStyle = theme === 'light' ? Light : Dark
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const {pathname} = useLocation()
 
 
+  const {isLoading, isError} = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsersStore,
+  })
+
+  if(isLoading) return <h1>Cargando...</h1>
+
+  if(isError) return <h1>Error...</h1>
+
+
 
   return (
     <>
-      <ThemeContext.Provider value={{setTheme, theme}}>
+      <ThemeContext.Provider value={{ theme}}>
         <ThemeProvider theme={themeStyle}>
 
           <AuthContextProvider>
@@ -38,7 +52,7 @@ function App() {
                 </Container> 
               ) 
               : (
-              <MyRoutes />
+              <Login />
               )
             }
 

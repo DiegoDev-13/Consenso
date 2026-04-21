@@ -29,7 +29,6 @@ export const useAuthStore = create((set) => ({
         window.location.href = "/"; 
         
         if(error) {
-            console.log(error.message)
             throw new Error("A ocurrido un error durante el cierre de sesión");
         }
     }
