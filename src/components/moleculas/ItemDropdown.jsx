@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import {Icon} from '../../index'
+import {Icon, ColorContent} from '../../index'
 
-export function ItemDropdown({item, funcion}) {
+export function ItemDropdown({item, funcion, color}) {
 
   return (
     <Container onClick={funcion}>
         <Icon>{item.icono}</Icon>
+        <ColorContent $ancho="12px" $alto="12px" $color={item.color} />
         <span>{item.text}</span>
     </Container>
 );

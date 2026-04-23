@@ -30,11 +30,13 @@ export const DataDesplegableTipo = [
   {
     text: "Categorias gastos",
     color: v.colorGastos,
+    bgcolor: v.colorbgGastos,
     tipo: "g",
   },
   {
     text: "Categorias ingresos",
     color: v.colorIngresos,
+    bgcolor: v.colorbgingresos,
     tipo: "i",
   },
 ];

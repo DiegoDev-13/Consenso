@@ -1,5 +1,5 @@
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
-import {Login, Home, ProtectedRoute, UserAuth, Configuration} from '../index'
+import {Login, Home, ProtectedRoute, UserAuth, Configuration, CategoriesTemplate} from '../index'
 
 export const MyRoutes = () => {
 
@@ -11,6 +11,7 @@ export const MyRoutes = () => {
 
         <Route element={<ProtectedRoute user={user} redirecTo="/login" />}>
           <Route path='/'  element={<Home/>} />
+          <Route path='/categorias'  element={<CategoriesTemplate/>} />
           <Route path='/configurar' element={<Configuration />} />
         </Route>
 
