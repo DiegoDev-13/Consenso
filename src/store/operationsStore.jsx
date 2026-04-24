@@ -2,6 +2,7 @@ import { create } from "zustand";
 import {v} from '../index'
 
 export const useOperations = create((set, get) => ({
+    type: 'i',
     titleBtnDrop: "Categorias ingresos",
     colorCategory: () => v.colorIngresos,
     bgCategory: () => v.colorbgingresos,

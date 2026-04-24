@@ -22,13 +22,13 @@ export const getUsers = async () => {
 
         const idAuthSupabase = await getIdAuthSupabase()
 
-        const {data, error} = await supabase.from('users').select('*').eq('id_auth_supabase', idAuthSupabase)
+        const {data, error} = await supabase.from('users').select('*').eq('id_auth_supabase', idAuthSupabase).maybeSingle()
 
         if(error) {
             alert(error.message + "getUsers")
         }
 
-        if(data) return data[0]
+        if(data) return data
     } catch (error) {
         // alert(error.error_description || error.message + 'getUsers')
     }

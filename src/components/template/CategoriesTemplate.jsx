@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import {Header, ContentFilters, BtnDropdown, useOperations, ListMenuDropdown, DataDesplegableTipo, BtnFilter, v} from "../../index"
+import {Header, ContentFilters, BtnDropdown, useOperations, ListMenuDropdown, DataDesplegableTipo, BtnFilter, v, TableCategories, RegisterCategorie} from "../../index"
 import { useState } from "react";
 
-export function CategoriesTemplate() {
+export function CategoriesTemplate({data}) {
 
+    const [openRegister, setOpenRegister] = useState(false)
+    const [action, setAction] = useState('')
+    const [dataSelect, setDataSelect] = useState([])
     const [openMenuUser, setOpenMenuUser] = useState(false)
     const {titleBtnDrop, colorCategory, bgCategory, setType} = useOperations()
     const [stateType, setStateType] = useState(false)
@@ -29,32 +32,42 @@ export function CategoriesTemplate() {
         setStateType(false)
     }
 
+    const newRegister = () => {
+        setOpenRegister(!openRegister)
+        setAction('Nuevo')
+        setDataSelect([])
+    }
+
   return (
-<Container onClick={closeDropdowns}>
-    <header className="header">
-        <Header state={openMenuUser} setState={openUsers} />
-    </header>
+    <Container onClick={closeDropdowns}>
+        {
+            openRegister && <RegisterCategorie onClose={() => setOpenRegister(!openRegister)} dataSelect={dataSelect} /> 
+        }
 
-    <section className="tipo">
-        <div onClick={(e) => e.stopPropagation()}>
-            <ContentFilters>
-                <BtnDropdown text={titleBtnDrop} bgColor={bgCategory} textColor={colorCategory} funcion={openType}/>
-                {stateType && <ListMenuDropdown data={DataDesplegableTipo} top="112%" funcion={(p) => changeType(p)}/> }
-            </ContentFilters>
-        </div>
-    </section>
+        <header className="header">
+            <Header state={openMenuUser} setState={openUsers} />
+        </header>
 
-    <section className="area2">
-        <ContentFilter>
-            <BtnFilter bgColor={bgCategory} textColor={colorCategory} icon={<v.agregar />} />
-        </ContentFilter>
-    </section>
+        <section className="tipo">
+            <div onClick={(e) => e.stopPropagation()}>
+                <ContentFilters>
+                    <BtnDropdown text={titleBtnDrop} bgColor={bgCategory} textColor={colorCategory} funcion={openType}/>
+                    {stateType && <ListMenuDropdown data={DataDesplegableTipo} top="112%" funcion={(p) => changeType(p)}/> }
+                </ContentFilters>
+            </div>
+        </section>
 
-    <section className="main">
-        
-    </section>
+        <section className="area2">
+            <ContentFilter>
+                <BtnFilter bgColor={bgCategory} textColor={colorCategory} icon={<v.agregar />} funcion={newRegister} />
+            </ContentFilter>
+        </section>
 
-</Container>
+        <section className="main">
+            <TableCategories data={data} />
+        </section>
+
+    </Container>
 );
 }
 const Container =styled.div`
@@ -87,6 +100,7 @@ const Container =styled.div`
             background-color: rgba(77, 237, 106, 0.14);
             display: flex;
             align-items: center;
+            justify-content: end;
         }
         .main {
             grid-area: main;
