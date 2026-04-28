@@ -40,7 +40,7 @@ export const editUserThemeCurrency = async (p) => {
 
         if(error) {
             alert('Error al editar thema y moneda del usuario', error.message)
-            // throw new Error("Error al editar Thema y moneda");
+            throw new Error("Error al editar Thema y moneda");
         }
 
         Swal.fire({

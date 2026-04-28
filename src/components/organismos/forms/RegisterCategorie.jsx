@@ -38,6 +38,7 @@ export function RegisterCategorie({ onClose, dataSelect, accion }) {
 
   async function insertar(data) {
     if (accion === "Editar") {
+
       const p = {
         description: data.descripcion,
         color: currentColor,
@@ -52,6 +53,7 @@ export function RegisterCategorie({ onClose, dataSelect, accion }) {
         setEstadoproceso(false);
         onClose();
       } catch (error) {}
+
     } else {
       const p = {
         description: data.descripcion,
@@ -74,7 +76,7 @@ export function RegisterCategorie({ onClose, dataSelect, accion }) {
 
   useEffect(() => {
     if (accion === "Editar") {
-      setEmojiselect(dataSelect.icono);
+      setEmojiselect(dataSelect.icon);
       setColor(dataSelect.color);
     } 
   }, []);
@@ -102,7 +104,7 @@ export function RegisterCategorie({ onClose, dataSelect, accion }) {
           <section>
             <div>
               <InputText
-                defaultValue={dataSelect.descripcion}
+                defaultValue={dataSelect.description}
                 register={register}
                 placeholder="Descripcion"
                 errors={errors}

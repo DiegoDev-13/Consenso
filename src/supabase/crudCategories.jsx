@@ -59,7 +59,7 @@ export const deleteCategories = async (p) => {
 
 export const editCategories = async (p) => {
     try {
-        const {error} = await supabase.from('categories').update(p).eq('id_user', p.idUser).eq('id', p.id)
+        const {error} = await supabase.from('categories').update(p).eq('id_user', p.id_user).eq('id', p.id)
 
         if(error) throw new Error(error);
 

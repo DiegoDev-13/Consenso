@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {CategoriesTemplate, getCategories, useCategoriesStore, useUsersStore, useOperations, Spinner} from '../index'
+import {CategoriesTemplate, getCategories, useCategoriesStore, useUsersStore, useOperations, SpinnerLoader} from '../index'
 import { useQuery } from "@tanstack/react-query";
 export function Categories() {
 
@@ -14,9 +14,9 @@ export function Categories() {
   
   })
 
-  if(isLoading) return <Spinner />
+  // if(isLoading) return <SpinnerLoader />
 
-  if(error) return <h1>Error...</h1>
+  // if(error) return <h1>Error...</h1>
 
 
   return (
