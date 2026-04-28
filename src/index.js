@@ -13,6 +13,7 @@ export * from './components/moleculas/ItemDropdown';
 export * from './components/moleculas/ListGeneric';
 export * from './components/moleculas/ListMenuDropdown';
 export * from './components/moleculas/Spinner';
+export * from './components/moleculas/SpinnerLoader';
 export * from './components/organismos/DataUser';
 export * from './components/organismos/Header';
 export * from './components/organismos/ListCountry';

@@ -41,7 +41,7 @@ export function CategoriesTemplate({data}) {
   return (
     <Container onClick={closeDropdowns}>
         {
-            openRegister && <RegisterCategorie onClose={() => setOpenRegister(!openRegister)} dataSelect={dataSelect} /> 
+            openRegister && <RegisterCategorie accion={action} onClose={() => setOpenRegister(!openRegister)} dataSelect={dataSelect} /> 
         }
 
         <header className="header">

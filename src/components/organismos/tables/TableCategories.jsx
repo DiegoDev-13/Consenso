@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {
   ContentActionsTable,
   useCategoriesStore,
+  Pagination
 } from "../../../index";
 import Swal from "sweetalert2";
 import { v } from "../../../styles/variables";
@@ -10,7 +11,7 @@ import { useState } from "react";
 export function TableCategories({data, SetopenRegistro, setdataSelect, setAccion,}) {
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(10);
-  const mx = data.length / porPagina;
+  const mx = data?.length / porPagina;
   const maximo = mx < 1 ? 1 : mx;
 
   const { eliminarCategorias } = useCategoriesStore();
@@ -50,8 +51,7 @@ export function TableCategories({data, SetopenRegistro, setdataSelect, setAccion
             </tr>
           </thead>
           <tbody>
-            {data
-              .slice(
+            {data?.slice(
                 (pagina - 1) * porPagina,
                 (pagina - 1) * porPagina + porPagina
               )
@@ -80,7 +80,7 @@ export function TableCategories({data, SetopenRegistro, setdataSelect, setAccion
               })}
           </tbody>
         </table>
-        {/* <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} /> */}
+        <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
       </Container>
     </>
   );

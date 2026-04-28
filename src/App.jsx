@@ -1,4 +1,4 @@
-import {MyRoutes, Sidebar, Device, Light, Dark, AuthContextProvider, MenuAmbur, useUsersStore, Login} from './index'
+import {MyRoutes, Sidebar, Device, Light, Dark, AuthContextProvider, MenuAmbur, useUsersStore, Login, SpinnerLoader} from './index'
 import {createContext, useState} from 'react'
 import {styled, ThemeProvider} from 'styled-components'
 import {useLocation} from 'react-router-dom'
@@ -23,7 +23,7 @@ function App() {
     queryFn: getUsersStore,
   })
 
-  if(isLoading) return <h1>Cargando...</h1>
+  if(isLoading) return <SpinnerLoader />
 
   if(isError) return <h1>Error...</h1>
 

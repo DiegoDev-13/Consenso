@@ -35,17 +35,7 @@ export const getCategories = async (p) => {
         if(error) throw new Error(error);
 
         return data
-    } catch (error) {
-        console.log("Error en mostrarCategorias:", error.message)
-
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Error al intentar mostrar categorias",
-        });
-
-        throw error;
-    }
+    } catch (error) {}
 }
 
 export const deleteCategories = async (p) => {

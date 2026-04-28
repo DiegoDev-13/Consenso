@@ -7,6 +7,7 @@ export const useOperations = create((set, get) => ({
     colorCategory: () => v.colorIngresos,
     bgCategory: () => v.colorbgingresos,
     setType: (p) => {
+        set({type: p.tipo})
         set({
             titleBtnDrop: p.text
         });

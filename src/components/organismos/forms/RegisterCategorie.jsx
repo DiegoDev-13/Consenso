@@ -43,7 +43,7 @@ export function RegisterCategorie({ onClose, dataSelect, accion }) {
         color: currentColor,
         icon: emojiselect,
         id: dataSelect.id,
-        idUser:dataUser.id,
+        id_user: dataUser.id,
         type: type,
       };
       try {
@@ -57,7 +57,7 @@ export function RegisterCategorie({ onClose, dataSelect, accion }) {
         description: data.descripcion,
         color: currentColor,
         icon: emojiselect,
-        idUser: dataUser.id,
+        id_user: dataUser.id,
         type: type,
       };
       try {
