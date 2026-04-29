@@ -75,3 +75,30 @@ export const editCategories = async (p) => {
         throw error;
     }
 }
+
+export const deleteAllCategories = async (p) => {
+    try {
+        const {error} = await supabase.from('categories').delete().eq('id_user', p.idUser);
+
+        if(error) throw new Error(error);
+
+         Swal.fire({
+            position: 'top',
+            icon: "success",
+            title: "Tu datos se han reseteado",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+
+    } catch (error) {
+        console.log("Error en EliminarCategorias:", error.message)
+
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al intentar eliminar categoria",
+        });
+
+        throw error;
+    }
+}

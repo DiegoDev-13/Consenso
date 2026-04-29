@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { deleteCategories, editCategories, getCategories, insertCategories } from "../index";
+import { deleteAllCategories, deleteCategories, editCategories, getCategories, insertCategories } from "../index";
 
 export const useCategoriesStore = create((set, get) => ({
     dataCategoria: [],
@@ -33,6 +33,16 @@ export const useCategoriesStore = create((set, get) => ({
             console.error("Error al eliminar:", error);
         }
     },
+
+    eliminarCategoriasTodas: async (p) => {
+        try {
+            await deleteAllCategories(p);
+            await get().mostrarCategorias();
+        } catch (error) {
+            console.error("Error al eliminar:", error);
+        }
+    },
+
 
     editarCategorias: async (p) => {
         try {

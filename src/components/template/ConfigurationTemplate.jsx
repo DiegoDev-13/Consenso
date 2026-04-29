@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Header, Selector, v, ListCountry, useUsersStore, ListGeneric, TemasData, BtnSave} from "../../index"
+import {Header, Selector, v, ListCountry, useUsersStore, ListGeneric, TemasData, BtnSave, CardDeleteData} from "../../index"
 import { useState } from "react";
 
 export function ConfigurationTemplate() {
@@ -64,6 +64,8 @@ export function ConfigurationTemplate() {
         </ContentCard>
 
         <BtnSave title="Guardar" bgColor={v.colorSecundario} icon={<v.iconoguardar/>} functionBtn={edit} />
+
+        <CardDeleteData />
     </section>
 
 </Container>
@@ -90,7 +92,6 @@ const Container =styled.div`
             grid-area: area2;
             /* background-color: rgba(77, 237, 106, 0.14); */
             display: flex;
-            align-items: center;
             flex-direction: column;
             justify-content: start;
             gap: 30px;
