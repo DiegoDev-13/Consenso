@@ -16,7 +16,7 @@ export const insertCategories = async (p) => {
 
         if(data){
             Swal.fire({
-                position: 'top-end',
+                position: 'top',
                 icon: "success",
                 title: "Tu registro se a guardado",
                 showConfirmButton: false,

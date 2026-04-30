@@ -6,6 +6,14 @@ export const useOperations = create((set, get) => ({
     titleBtnDrop: "Categorias ingresos",
     colorCategory: () => v.colorIngresos,
     bgCategory: () => v.colorbgingresos,
+    year: null,
+    month: null,
+    setMonth: (p) => {
+        set({month: p})
+    },
+    setYear: (p) => {
+        set({year: p})
+    },
     setType: (p) => {
         set({type: p.tipo})
         set({
