@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import {Header, CalendarLinear, CardTotals, useOperations, v} from "../../index"
+import {Device} from '../../styles/breakpoints' 
+import {Header, CalendarLinear, CardTotals, useOperations, v, useMovementsStore, useUsersStore, TableMovements} from "../../index"
 import { useState } from "react";
 import dayjs from 'dayjs'
+import { useQuery } from "@tanstack/react-query";
 
 export function MovementsTemplate() {
 
@@ -9,7 +11,16 @@ export function MovementsTemplate() {
     const [formatDate, setFormatDate] = useState("")
     const [openMenuUser, setOpenMenuUser] = useState(false)
 
-    const {type, setType, colorCategory} = useOperations()
+    const {idUser} = useUsersStore()
+
+    const {type, setType, colorCategory, year, month} = useOperations()
+
+    const {dataMovements, totalYearMonth, totalYearMonthPaid, totalYearMonthPending, getMovements} = useMovementsStore()
+
+    const { } = useQuery({
+        queryKey: ['getMovementsMonthYear'],
+        queryFn: () => getMovements({year: year, month: month, idUser: idUser, typeCategories: type})
+    })
 
   return (
 <Container>
@@ -18,9 +29,9 @@ export function MovementsTemplate() {
     </header>
 
     <section className="totals">
-        <CardTotals title={type == 'g' ? 'Gastos pendientes' : "Ingresos pendientes"} color={colorCategory} icon={<v.flechaarribalarga/>} />
-        <CardTotals title={type == 'g' ? 'Gastos pagados' : "Ingresos pagados"} color={colorCategory} icon={<v.flechaabajolarga/>} />
-        <CardTotals title="Total" color={colorCategory} icon={<v.balance />} />
+        <CardTotals total={totalYearMonthPending} title={type == 'g' ? 'Gastos pendientes' : "Ingresos pendientes"} color={colorCategory} icon={<v.flechaarribalarga/>} />
+        <CardTotals total={totalYearMonthPaid} title={type == 'g' ? 'Gastos pagados' : "Ingresos pagados"} color={colorCategory} icon={<v.flechaabajolarga/>} />
+        <CardTotals total={totalYearMonth} title="Total" color={colorCategory} icon={<v.balance />} />
     </section>
 
     <section className="calendar">
@@ -28,7 +39,7 @@ export function MovementsTemplate() {
     </section>
 
     <section className="main">
-        
+        <TableMovements data={dataMovements} />
     </section>
 
 </Container>
@@ -56,8 +67,14 @@ const Container =styled.div`
         .totals {
             grid-area: totals;
             background-color: rgba(229, 67, 26, 0.14);
-            display: flex;
+            display: grid;
             align-items: center;
+            grid-template-columns: 1fr;
+            gap: 10px;
+
+            @media ${Device.tablet} {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         .calendar {
             grid-area: calendar;

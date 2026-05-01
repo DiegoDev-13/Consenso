@@ -45,3 +45,13 @@ export const deleteMovements = async (p) => {
         alert(error.error_description || error.message + 'Error al eliminar momivientos');
     }
 }
+
+export const getMovementsPerMonthYear = async (p) => {
+    try {
+        const {data} = await supabase.rpc('mmovementsmonthyear', {year: p.year, month: p.month, iduser: p.idUser, typecategories: p.typeCategories})
+
+        return data
+    } catch (error) {
+        
+    }
+}

@@ -17,7 +17,7 @@ export function CardTotals({color, total, title, icon}) {
         </section>
 
         <section className="contentIcon">
-          <BtnCircular height="50px" width="50px" bgColor={color} fontSize="25px" icon={icon} textColor="#fff"/>
+          <BtnCircular height="50px" width="50px" bgColor={color} fontSize="25px" icon={icon} textColor="#fff" translateX="-45px" translateY="-15px"/>
         </section>
 
     </Container>

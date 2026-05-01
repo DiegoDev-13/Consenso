@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export function BtnCircular({icon, width, height, bgColor, textColor, fontSize, translateX, translateY}) {
   return (
-<Container bgColor={bgColor} textColor={textColor} height={height} width={width} fontSize={fontSize} translateX={translateX} translateY={translateY}>
+<Container bgColor={bgColor} textColor={textColor} height={height} width={width} fontSize={fontSize} $translateX={translateX} $translateY={translateY}>
     <span>{icon}</span>
 </Container>
 );
@@ -15,7 +15,7 @@ const Container =styled.div`
     justify-content: center;
     align-items: center;
     position: absolute;
-    transform: translateX(${(props) => props.translateX}) translateY(${(props) => props.translateY});
+    transform: translateX(${(props) => props.$translateX}) translateY(${(props) => props.$translateY});
 
     span{
         font-size: ${(props) => props.font};
