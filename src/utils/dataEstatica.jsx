@@ -41,6 +41,21 @@ export const DataDesplegableTipo = [
   },
 ];
 
+export const DataDesplegableTipoMovements = [
+  {
+    text: "Gastos",
+    color: v.colorGastos,
+    bgcolor: v.colorbgGastos,
+    tipo: "g",
+  },
+  {
+    text: "Ingresos",
+    color: v.colorIngresos,
+    bgcolor: v.colorbgingresos,
+    tipo: "i",
+  },
+];
+
 
 //data SIDEBAR
 export const LinksArray = [

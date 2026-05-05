@@ -4,6 +4,7 @@ import {v} from '../index'
 export const useOperations = create((set, get) => ({
     type: 'i',
     titleBtnDrop: "Categorias ingresos",
+    titleBtnDropMovements: "Ingresos",
     colorCategory: () => v.colorIngresos,
     bgCategory: () => v.colorbgingresos,
     year: null,
@@ -17,7 +18,8 @@ export const useOperations = create((set, get) => ({
     setType: (p) => {
         set({type: p.tipo})
         set({
-            titleBtnDrop: p.text
+            titleBtnDrop: p.text,
+            titleBtnDropMovements: p.text
         });
         set({
             colorCategory: p.color

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Device, v, BtnClose } from '../../index'
 
-export function ListGeneric({data, setState, funcion, scroll, bottom}) {
+export function ListRegisterMovements({data, setState, funcion, scroll, bottom}) {
     
     const select = (p) => {
         funcion(p)
@@ -18,8 +18,8 @@ export function ListGeneric({data, setState, funcion, scroll, bottom}) {
             {
                 data.map((item, index) => (
                     <ItemContainer key={index} onClick={() => select(item)}>
-                        <span>{item.icono}</span>
-                        <span>{item.descripcion}</span>
+                        <span>{item.icon}</span>
+                        <span>{item.description}</span>
                     </ItemContainer>
                 ))
             }
@@ -47,7 +47,7 @@ const Container =styled.div`
     }
 
     .ContentItems {
-        overflow-y: ${(props) => props.scroll};
+        overflow-y: ${(props) => props.$scroll};
     }
 `
 

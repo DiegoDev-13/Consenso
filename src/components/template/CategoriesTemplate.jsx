@@ -8,8 +8,9 @@ export function CategoriesTemplate({data}) {
     const [action, setAction] = useState('')
     const [dataSelect, setDataSelect] = useState([])
     const [openMenuUser, setOpenMenuUser] = useState(false)
-    const {titleBtnDrop, colorCategory, bgCategory, setType} = useOperations()
     const [stateType, setStateType] = useState(false)
+    
+    const {titleBtnDrop, colorCategory, bgCategory, setType} = useOperations()
 
     const changeType = (p) => {
         setType(p)

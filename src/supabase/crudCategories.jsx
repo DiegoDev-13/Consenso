@@ -32,7 +32,12 @@ export const getCategories = async (p) => {
     try {
         const {data, error} = await supabase.from('categories').select().eq('id_user', p.idUser).eq('type', p.type).order('id', {ascending: false})
 
-        if(error) throw new Error(error);
+        // if(error) throw new Error(error);
+
+        if(error) {
+            console.log(error.message)
+            throw new Error(error)
+        }
 
         return data
     } catch (error) {}

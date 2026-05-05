@@ -12,6 +12,7 @@ export const insertMovements = async (p) => {
                 text: 'Ya existe un registro con ' + p.description,
                 footer: '<a href="">Agregue una nueva descripcion</a>'
             })
+            console.log(error.message)
             throw new Error(error.message);
         }
 
@@ -48,7 +49,13 @@ export const deleteMovements = async (p) => {
 
 export const getMovementsPerMonthYear = async (p) => {
     try {
-        const {data} = await supabase.rpc('mmovementsmonthyear', {year: p.year, month: p.month, iduser: p.idUser, typecategories: p.typeCategories})
+        const {data, error} = await supabase.rpc('mmovementsmonthyear', {year: p.year, month: p.month, iduser: p.idUser, typecategories: p.typeCategories})
+
+        if(error){
+            console.log(error.message)
+            throw new ErrorEvent(error);
+            
+        }
 
         return data
     } catch (error) {
