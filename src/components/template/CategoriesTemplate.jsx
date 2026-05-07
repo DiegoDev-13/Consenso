@@ -69,7 +69,12 @@ export function CategoriesTemplate({data}) {
 
         <section className="main">
             {
-                data?.length == 0 && <LottieAnimation width={300} height={300} animation={type == 'i' ? vacioverde : vaciorojo}/>
+                data?.length == 0 && (
+                    <ContentAnimation>
+                        <LottieAnimation width={300} height={300} animation={type == 'i' ? vacioverde : vaciorojo}/>
+                        <h2>Vacio...</h2>
+                    </ContentAnimation>
+                )
             }
 
 
@@ -121,4 +126,13 @@ const Container =styled.div`
 const ContentFilter = styled.div `
     display: flex;
     flex-wrap: wrap;
+`
+const ContentAnimation = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2{
+        text-align: center;
+    }
 `
