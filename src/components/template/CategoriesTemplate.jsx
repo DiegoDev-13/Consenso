@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import {Header, ContentFilters, BtnDropdown, useOperations, ListMenuDropdown, DataDesplegableTipo, BtnFilter, v, TableCategories, RegisterCategorie, LottieAnimation} from "../../index"
-import { useState } from "react";
+import {Header, ContentFilters, BtnDropdown, useOperations, ListMenuDropdown, DataDesplegableTipo, BtnFilter, v, TableCategories, RegisterCategorie} from "../../index"
+import { useState, lazy, Suspense } from "react";
+import {LottieAnimation} from '../moleculas/LottieAnimation.jsx'
 import vacioverde from '../../assets/vacioverde.json'
 import vaciorojo from '../../assets/vaciorojo.json'
 
@@ -68,7 +69,7 @@ export function CategoriesTemplate({data}) {
 
         <section className="main">
             {
-                data.length == 0 && <LottieAnimation height="300px" width="300px" animation={type == 'i' ? vacioverde : vaciorojo}/>
+                data?.length == 0 && <LottieAnimation width={300} height={300} animation={type == 'i' ? vacioverde : vaciorojo}/>
             }
 
 

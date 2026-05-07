@@ -1,17 +1,20 @@
-import styled from "styled-components";
-import Lottie from "lottie-react"; // Esta sí es compatible con Vi
+import styled from 'styled-components'
+import LottieComponent from "lottie-react"; 
 
-export function LottieAnimation({ height, width, animation }) { 
+export function LottieAnimation({width, height, animation}) {
+  // 1. Vite a veces importa la librería como { default: Componente }
+  // Esta línea asegura que tengamos el componente real
+  const Lottie = LottieComponent.default || LottieComponent;
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animation 
-    }
+  // 3. Verificación de seguridad
+  if (typeof Lottie !== "function") {
+    console.error("Lottie no es una función, es:", typeof Lottie, Lottie);
+    return <div>Error cargando animación</div>;
+  }
 
   return (
     <Container>
-        <Lottie options={defaultOptions} height={Number(height)} width={Number(width)} isClickToPauseDisabled />
+      <Lottie animationData={animation} loop={true} style={{ width: width, height: height }}  />
     </Container>
   );
 }
@@ -19,4 +22,4 @@ export function LottieAnimation({ height, width, animation }) {
 const Container = styled.div`
   display: flex;
   justify-content: center;
-`;
+`

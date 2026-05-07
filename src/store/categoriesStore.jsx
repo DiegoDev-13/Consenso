@@ -6,13 +6,18 @@ export const useCategoriesStore = create((set, get) => ({
     categoriaItemSelect: [],
     parametros:{},
 
-    // 1. Esta función ya hace el set(), no necesitas envolverla en otro set
     mostrarCategorias: async (p) => {
         try {
             const res = await getCategories(p);
             set({parametros:p})
             set({ dataCategoria: res });
-            set({ categoriaItemSelect: res[0] });
+            
+            if (res && res.length > 0) {
+                set({ categoriaItemSelect: res[0] });
+            } else {
+                // Opcional: Limpiar el ítem seleccionado si no hay datos
+                set({ categoriaItemSelect: [] }); 
+            }
             return res;
         } catch (error) {
             console.error("Error cargando categorías:", error);
@@ -26,10 +31,9 @@ export const useCategoriesStore = create((set, get) => ({
     insertarCategorias: async (p) => {
         try {
             await insertCategories(p);
-            // 2. LLAMA a la función directamente. NO uses set(...) aquí.
             await get().mostrarCategorias(); 
-            const {parametros} = get()
-            set(mostrarCategorias(parametros))
+            // const {parametros} = get()
+            // set(mostrarCategorias(parametros))
         } catch (error) {
             console.error("Error al insertar:", error);
         }
@@ -39,7 +43,7 @@ export const useCategoriesStore = create((set, get) => ({
         try {
             await deleteCategories(p);
             await get().mostrarCategorias();
-            set(mostrarCategorias(p));
+            // set(mostrarCategorias(p));
         } catch (error) {
             console.error("Error al eliminar:", error);
         }
