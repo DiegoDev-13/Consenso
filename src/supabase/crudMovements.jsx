@@ -49,16 +49,20 @@ export const deleteMovements = async (p) => {
 
 export const getMovementsPerMonthYear = async (p) => {
     try {
-        const {data, error} = await supabase.rpc('mmovementsmonthyear', {year: p.year, month: p.month, iduser: p.idUser, typecategories: p.typeCategories})
+        const { data, error } = await supabase.rpc('mmovementsmonthyear', {
+            p_year: p.year,           // Cambiado de 'year' a 'p_year'
+            p_month: p.month,         // Cambiado de 'month' a 'p_month'
+            p_iduser: p.idUser,       // Cambiado de 'iduser' a 'p_iduser'
+            p_typecategories: p.typeCategories // Cambiado de 'typecategories' a 'p_typecategories'
+        })
 
-        if(error){
-            console.log(error.message)
-            throw new ErrorEvent(error);
-            
+        if (error) {
+            console.error("Error en RPC:", error.message)
+            return null
         }
 
         return data
     } catch (error) {
-        
+        console.error("Error inesperado:", error)
     }
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import {CategoriesTemplate, getCategories, useCategoriesStore, useUsersStore, useOperations, SpinnerLoader} from '../index'
+import {CategoriesTemplate, getCategories, useCategoriesStore, useUsersStore, useOperations, SpinnerLoader, LottieAnimation} from '../index'
 import { useQuery } from "@tanstack/react-query";
+
 export function Categories() {
 
   const {type} = useOperations()
@@ -14,17 +15,15 @@ export function Categories() {
   
   })
 
-  // if(isLoading) return <SpinnerLoader />
+  if(isLoading) return <SpinnerLoader />
 
-  // if(error) return <h1>Error...</h1>
+  if(error) return <h1>Error...</h1>
 
 
   return (
-    <Container>
-        <CategoriesTemplate data={dataCategoria} />
-    </Container>
+
+    <CategoriesTemplate data={dataCategoria}>
+    </CategoriesTemplate>
+
 );
 }
-const Container =styled.div`
-  height: 100dvh;
-`

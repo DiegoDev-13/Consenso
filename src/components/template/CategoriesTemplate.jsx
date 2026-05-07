@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import {Header, ContentFilters, BtnDropdown, useOperations, ListMenuDropdown, DataDesplegableTipo, BtnFilter, v, TableCategories, RegisterCategorie} from "../../index"
+import {Header, ContentFilters, BtnDropdown, useOperations, ListMenuDropdown, DataDesplegableTipo, BtnFilter, v, TableCategories, RegisterCategorie, LottieAnimation} from "../../index"
 import { useState } from "react";
+import vacioverde from '../../assets/vacioverde.json'
+import vaciorojo from '../../assets/vaciorojo.json'
 
 export function CategoriesTemplate({data}) {
 
@@ -10,7 +12,7 @@ export function CategoriesTemplate({data}) {
     const [openMenuUser, setOpenMenuUser] = useState(false)
     const [stateType, setStateType] = useState(false)
     
-    const {titleBtnDrop, colorCategory, bgCategory, setType} = useOperations()
+    const {titleBtnDrop, colorCategory, bgCategory, setType, type} = useOperations()
 
     const changeType = (p) => {
         setType(p)
@@ -65,6 +67,11 @@ export function CategoriesTemplate({data}) {
         </section>
 
         <section className="main">
+            {
+                data.length == 0 && <LottieAnimation height="300px" width="300px" animation={type == 'i' ? vacioverde : vaciorojo}/>
+            }
+
+
             <TableCategories setAccion={setAction} setdataSelect={setDataSelect} SetopenRegistro={setOpenRegister} data={data} /> 
         </section>
 

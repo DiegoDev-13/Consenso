@@ -6,11 +6,12 @@ returns table(
   fecha date,
   state text,
   cuenta text,
-  categoria text
+  categoria text,
+  worthAndCoin text
 )
 language sql
 as $$
-  select movements.id, movements.description, movements.worth, movements.fecha, movements.state, account.description as "cuenta", categories.description as "categoria" from movements
+  select movements.id, movements.description, movements.worth, movements.fecha, movements.state, account.description as "cuenta", categories.description as "categoria", (users.currency || ' ' || movements.worth) as worthAndCoin from movements
   inner join account on account.id=movements."idAccount"
   inner join users on users.id = account.user_id
   inner join categories on categories.id = movements."idCategories"

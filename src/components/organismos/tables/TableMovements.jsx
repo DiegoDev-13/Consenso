@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {
   ContentActionsTable,
-  useCategoriesStore,
-  Pagination
+  Pagination,
+  useMovementsStore
 } from "../../../index";
 import Swal from "sweetalert2";
 import { v } from "../../../styles/variables";
@@ -14,7 +14,7 @@ export function TableMovements({data, SetopenRegistro, setdataSelect, setAccion,
   const mx = data?.length / porPagina;
   const maximo = mx < 1 ? 1 : mx;
 
-  const { eliminarCategorias } = useCategoriesStore();
+  const {eliminarMovimiento} = useMovementsStore()
 
   function eliminar(p) {
     Swal.fire({
@@ -27,7 +27,7 @@ export function TableMovements({data, SetopenRegistro, setdataSelect, setAccion,
       confirmButtonText: "Si, eliminar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await eliminarCategorias({ id: p.id, idUser: p.id_user });
+        await eliminarMovimiento({ id: p.id, idUser: p.id_user });
       }
     });
   }
@@ -60,16 +60,36 @@ export function TableMovements({data, SetopenRegistro, setdataSelect, setAccion,
               .map((item, index) => {
                 return (
                   <tr key={item.id}>
-                    <th scope="row">{item.description}</th>
-                    <td data-title="Estado">
+                    {/* <th scope="row">{item.description}</th> */}
+                    <th scope="row">
                       <Estado bgcolor={item.state == '1' ? '#69e673' : '#b3b3b3'}>
                       </Estado>
+                    </th>
+                    <td data-title="Fecha">
+                      <ContentItemsNames>
+                        {item.fecha}
+                      </ContentItemsNames>
                     </td>
-                    <td date-title="Fehca">{item.fecha}</td>
-                    <td scope="row">{item.description}</td>
-                    <td scope="row">{item.categoria}</td>
-                    <td scope="row">{item.cuenta}</td>  
-                    <td scope="row">{item.worthAndCoin}</td>  
+                    <td data-title="Descripcion">
+                      <ContentItemsNames>
+                        {item.description}
+                      </ContentItemsNames>
+                    </td>
+                    <td data-title="Categoria">
+                      <ContentItemsNames>
+                        {item.categoria}
+                      </ContentItemsNames>
+                    </td>
+                    <td data-title="Cuenta">
+                      <ContentItemsNames>
+                        {item.cuenta}
+                      </ContentItemsNames>
+                      </td>  
+                    <td data-title="Monto">
+                       <ContentItemsNames>
+                          {item.worthandcoin}
+                       </ContentItemsNames>
+                    </td>  
                     <td data-title="Acciones">
                       <ContentActionsTable
                         funcionEditar={() => editar(item)}
@@ -243,5 +263,15 @@ const Estado = styled.div`
     height: 20px;
     border-radius: 50%;
     background-color: ${(props) => props.bgcolor};
+  }
+`
+
+const ContentItemsNames = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  gap:10px;
+  @media (max-width: 48em) {
+    justify-content:end;
   }
 `

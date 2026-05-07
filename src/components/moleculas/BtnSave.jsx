@@ -3,7 +3,7 @@ import {Icon} from '../../index'
 
 export function BtnSave({functionBtn, title, bgColor, icon}) {
   return (
-<Container type="submit" bgColor={bgColor}>
+<Container type="submit" $bgColor={bgColor}>
   <Icon>{icon}</Icon>
   <span className="btn" onClick={functionBtn}>
     {title}
@@ -21,7 +21,7 @@ const Container = styled.button`
   background: initial;
   z-index: 2;
   .btn{
-    background: ${(props) => props.bgColor};
+    background: ${(props) => props.$bgColor};
     padding: 0.6em 1.3em;
     font-weight: 900;
     font-size: 18px;

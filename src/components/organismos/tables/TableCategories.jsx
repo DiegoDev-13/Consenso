@@ -9,6 +9,8 @@ import { v } from "../../../styles/variables";
 import { useState } from "react";
 
 export function TableCategories({data, SetopenRegistro, setdataSelect, setAccion,}) {
+  if(data.length == 0) return
+
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(10);
   const mx = data?.length / porPagina;

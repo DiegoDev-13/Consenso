@@ -3,7 +3,7 @@ import {v} from '../../index'
 
 export function Selector({color, state, funcion, text1, text2}) {
   return (
-    <Container color={color} onClick={funcion}>
+    <Container $color={color} onClick={funcion}>
         <div>
             <span>{text1}</span>
             <span>{text2}</span>
@@ -18,7 +18,7 @@ const Container =styled.div`
     align-items: center;
     height: 100%;
     cursor: pointer;
-    border: 2px solid ${(props) => props.color};
+    border: 2px solid ${(props) => props.$color};
     border-radius: 10px;
     padding: 10px;
     gap: 10px;

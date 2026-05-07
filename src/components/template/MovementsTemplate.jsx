@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Device} from '../../styles/breakpoints' 
 import {Header, CalendarLinear, CardTotals, useOperations, v, useMovementsStore, useUsersStore, TableMovements, useAccountStore, useCategoriesStore, BtnDropdown, ListMenuDropdown, DataDesplegableTipoMovements, ContentFilters, BtnFilter, RegisterMovements, getMovementsPerMonthYear} from "../../index"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from 'dayjs'
 import { useQuery } from "@tanstack/react-query";
 
@@ -40,13 +40,9 @@ export function MovementsTemplate() {
     }
 
     useQuery({
-        queryKey: ['getMovementsMonthYear'],
-        queryFn: () => getMovements({year: year, month: month, idUser: idUser, typeCategories: type})
-    })
-
-    const {data: datamovemetns, isLoading} = useQuery({
-        queryKey: ['getMovementsMonthYear'],
-        queryFn: () => getMovementsPerMonthYear({year: year, month: month, idUser: idUser, typeCategories: type})
+        queryKey: ['getMovementsMonthYear', type, year, month, idUser],
+        queryFn: () => getMovements({year: year, month: Number(month), idUser: idUser, typeCategories: type}),
+        enabled: !!idUser
     })
 
     useQuery({
@@ -58,8 +54,6 @@ export function MovementsTemplate() {
         queryKey: ['getCategories'],
         queryFn:() => mostrarCategorias({idUser: idUser, type: type})
     })
-
-    console.log(datamovemetns)
 
   return (
     <Container>
@@ -127,20 +121,20 @@ const Container =styled.div`
 
         .header {
             grid-area: header;
-            background-color: rgba(103, 93, 241, 0.14);
+            /* background-color: rgba(103, 93, 241, 0.14); */
             display: flex;
             align-items: center;
         }
         .tipo {
             grid-area: tipo;
-            background-color: rgba(107, 214, 14, 0.14);
+            /* background-color: rgba(107, 214, 14, 0.14); */
             display: flex;
             align-items: center;
             justify-content: space-between
         }
         .totals {
             grid-area: totals;
-            background-color: rgba(229, 67, 26, 0.14);
+            /* background-color: rgba(229, 67, 26, 0.14); */
             display: grid;
             align-items: center;
             grid-template-columns: 1fr;
@@ -152,14 +146,14 @@ const Container =styled.div`
         }
         .calendar {
             grid-area: calendar;
-            background-color: rgba(77, 237, 106, 0.14);
+            /* background-color: rgba(77, 237, 106, 0.14); */
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .main {
             grid-area: main;
-            background-color: rgba(179, 46, 241, 0.14);
+            /* background-color: rgba(179, 46, 241, 0.14); */
         }
     
 `

@@ -13,6 +13,7 @@ export * from './components/moleculas/ItemDropdown';
 export * from './components/moleculas/ListGeneric';
 export * from './components/moleculas/ListMenuDropdown';
 export * from './components/moleculas/ListRegisterMovements';
+export * from './components/moleculas/LottieAnimation';
 export * from './components/moleculas/Spinner';
 export * from './components/moleculas/SpinnerLoader';
 export * from './components/organismos/CalendarLinear';
