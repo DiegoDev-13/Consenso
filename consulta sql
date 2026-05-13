@@ -1,4 +1,12 @@
-create or replace function mmovementsmonthyear(year int, month int, iduser int, typecategories text)
+-- Primero borramos la versión anterior para evitar conflictos de parámetros
+drop function if exists mmovementsmonthyear(int, int, int, text);
+
+create or replace function mmovementsmonthyear(
+  p_year int, 
+  p_month int, 
+  p_iduser int, 
+  p_typecategories text
+)
 returns table(
   id int,
   description text,
@@ -8,12 +16,28 @@ returns table(
   cuenta text,
   categoria text,
   worthAndCoin text
-)
+) 
 language sql
+security definer -- Esto ayuda si el RLS te estaba bloqueando filas
 as $$
-  select movements.id, movements.description, movements.worth, movements.fecha, movements.state, account.description as "cuenta", categories.description as "categoria", (users.currency || ' ' || movements.worth) as worthAndCoin from movements
-  inner join account on account.id=movements."idAccount"
-  inner join users on users.id = account.user_id
-  inner join categories on categories.id = movements."idCategories"
-  where categories.type = typecategories and date_part('year', movements.fecha)=year and date_part('month', movements.fecha)=month and users.id = iduser
+  select 
+    m.id, 
+    m.description, 
+    m.worth, 
+    m.fecha, 
+    m.state, 
+    a.description as "cuenta", 
+    c.description as "categoria", 
+    (u.currency || ' ' || m.worth) as worthAndCoin 
+  from movements m
+  inner join account a on a.id = m."idAccount"
+  inner join users u on u.id = a.user_id
+  inner join categories c on c.id = m."idCategories"
+  where u.id = p_iduser 
+    and c.type = p_typecategories
+    and date_part('year', m.fecha) = p_year 
+    and date_part('month', m.fecha) = p_month;
 $$;
+
+
+drop function if exists mmovementsmonthyear(int, int, int, text);

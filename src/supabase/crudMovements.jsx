@@ -66,3 +66,15 @@ export const getMovementsPerMonthYear = async (p) => {
         console.error("Error inesperado:", error)
     }
 }
+
+export async function RptMovimientosPorMesAño(p) {
+  try {
+    const { data } = await supabase.rpc("rptmovimientos_anio_mes", {
+      r_year: p.year,
+      r_month: p.month,
+      r_iduser: p.idUser,
+      r_typecategories: p.typeCategories
+    });
+    return data;
+  } catch (error) {}
+}

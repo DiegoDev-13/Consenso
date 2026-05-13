@@ -1,8 +1,9 @@
 import { create } from "zustand";
-import { getMovementsPerMonthYear, insertMovements, deleteMovements } from "../index";
+import { getMovementsPerMonthYear, insertMovements, deleteMovements, RptMovimientosPorMesAño } from "../index";
 
 export const useMovementsStore = create((set, get) => ({
     dataMovements: [],
+    dataRptMovimientosAñoMes: [],
     totalYearMonth: 0,
     totalYearMonthPaid: 0,
     totalYearMonthPending: 0,
@@ -54,10 +55,17 @@ export const useMovementsStore = create((set, get) => ({
         const {parametros} =get();
         set(getMovements(parametros));
     },
+
     eliminarMovimiento: async (p) => {
         await deleteMovements(p);
         const {parametros} =get();
         const { getMovements } = get();
         set(getMovements(parametros));
+    },
+
+    rptMovimientosAñoMes: async (p) => {
+        const response = await RptMovimientosPorMesAño(p);
+        set({ dataRptMovimientosAñoMes: response });
+        return response;
     },
 }))
