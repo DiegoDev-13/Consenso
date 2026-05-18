@@ -1,14 +1,22 @@
 import styled from "styled-components";
 import { UserAuth, BtnCircular, v, ListMenuDropdown, DesplegableUser, useAuthStore } from "../../index";
+import { useNavigate } from "react-router-dom";
+
 
 export function DataUser({state, setState}) {
+
+    const navigate = useNavigate()
 
     const {user} = UserAuth()
     const {signOut} = useAuthStore()
 
     const funcionXtipo = async (tipo) => {
-        if(tipo === "cerrarsesion"){
+        if(tipo.tipo == "cerrarsesion"){
             await signOut()
+        }
+
+        if(tipo.tipo == "configuracion"){
+            navigate('/configurar')
         }
     }
 

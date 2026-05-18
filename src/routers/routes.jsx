@@ -15,6 +15,7 @@ export const MyRoutes = () => {
           <Route path='/movimientos'  element={<Movements/>} />
           <Route path='/informes'  element={<Reports/>} />
           <Route path='/configurar' element={<Configuration />} />
+          <Route path='/acercade'  element={<Home/>} />
         </Route>
 
       </Routes>
